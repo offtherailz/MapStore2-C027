@@ -10,15 +10,69 @@ module.exports = {
     pages: [{
         name: "home",
         path: "/",
-        component: require('./pages/Home')
+        component: require('../MapStore2/web/client/product/pages/Maps')
     }, {
-        name: "main",
-        path: "/main",
-        component: require('./pages/Main')
+        name: "maps",
+        path: "/maps",
+        component: require('../MapStore2/web/client/product/pages/Maps')
+    }, {
+        name: "mapviewer",
+        path: "/viewer/:mapType/:mapId",
+        component: require('../MapStore2/web/client/product/pages/MapViewer')
+    }, {
+        name: "manager",
+        path: "/manager",
+        component: require('../MapStore2/web/client/product/pages/Manager')
+    }, {
+        name: "manager",
+        path: "/manager/:tool",
+        component: require('../MapStore2/web/client/product/pages/Manager')
     }],
     pluginsDef: require('./plugins.js'),
     initialState: {
-        defaultState: {},
-        mobile: {}
+        defaultState: {
+            mousePosition: {enabled: false},
+            controls: {
+                help: {
+                    enabled: false
+                },
+                print: {
+                    enabled: false
+                },
+                toolbar: {
+                    active: null,
+                    expanded: false
+                },
+                drawer: {
+                    enabled: false,
+                    menu: "1"
+                },
+                RefreshLayers: {
+                    enabled: false,
+                    options: {
+                        bbox: true,
+                        search: true,
+                        title: false,
+                        dimensions: false
+                    }
+                },
+                cookie: {
+                    enabled: false,
+                    seeMore: false
+                }
+            }
+        },
+        maps: {
+            mapType: "leaflet"
+        },
+        mobile: {
+            mapInfo: {enabled: true, infoFormat: 'text/html' },
+            mousePosition: {enabled: true, crs: "EPSG:4326", showCenter: true}
+        }
+    },
+    storeOpts: {
+        persist: {
+            whitelist: ['security']
+        }
     }
 };

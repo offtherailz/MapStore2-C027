@@ -1,0 +1,8 @@
+{
+    "locale": "de-DE",
+    "messages": {
+        "home":{
+            "description": "Servizio Informativo territoriale della città metropolitana di Firenze"
+        }
+    }
+}

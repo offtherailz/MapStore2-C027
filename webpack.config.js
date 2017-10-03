@@ -6,14 +6,15 @@ var NoEmitOnErrorsPlugin = require("webpack/lib/NoEmitOnErrorsPlugin");
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const assign = require('object-assign');
-const themeEntries = require('./MapStore2/themes.js').themeEntries;
 const extractThemesPlugin = require('./MapStore2/themes.js').extractThemesPlugin;
 module.exports = {
     entry: assign({
         'webpack-dev-server': 'webpack-dev-server/client?http://0.0.0.0:8081', // WebpackDevServer host and port
         'webpack': 'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
-        'MapStore2-C027': path.join(__dirname, "js", "app")
-    }, themeEntries),
+        'MapStore2-C027': path.join(__dirname, "js", "app"),
+        "themes/firenze": path.join(__dirname, "assets", "themes", "firenze", "theme.less"),
+        "embedded": path.join(__dirname, "MapStore2", "web", "client", "product", "embedded")
+    }),
     output: {
         path: path.join(__dirname, "dist"),
         publicPath: "/dist/",
@@ -125,11 +126,13 @@ module.exports = {
     },
     devServer: {
         proxy: {
-            '/mapstore/rest/geostore': {
-                target: "http://dev.mapstore2.geo-solutions.it"
+            '/mapstore2/rest/geostore': {
+                target: "http://dev.mapstore2.geo-solutions.it",
+                pathRewrite: {'^/mapstore2/rest/geostore': '/mapstore/rest/geostore'}
             },
-            '/mapstore/proxy': {
-                target: "http://dev.mapstore2.geo-solutions.it"
+            '/mapstore2/proxy': {
+                target: "http://dev.mapstore2.geo-solutions.it",
+                pathRewrite: {'^/mapstore2/proxy': '/mapstore/proxy'}
             }
         }
     },

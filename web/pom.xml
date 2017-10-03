@@ -56,12 +56,32 @@
   </dependencies>
 
   <build>
-    <finalName>MapStore2-C027</finalName>
+    <finalName>mapstore2</finalName>
     <plugins>
         <plugin>
             <artifactId>maven-resources-plugin</artifactId>
             <version>2.6</version>
             <executions>
+                <execution>
+                    <id>LDAP configuration</id>
+                    <phase>process-sources</phase>
+                    <goals>
+                        <goal>copy-resources</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
+                        <encoding>UTF-8</encoding>
+                        <filters>
+                            <filter>${basedir}/ldap.properties</filter>
+                        </filters>
+                        <resources>
+                            <resource>
+                                <directory>${basedir}/src/main/resources-filtered/WEB-INF/classes</directory>
+                                <filtering>true</filtering>
+                            </resource>
+                        </resources>
+                    </configuration>
+                </execution>
                 <execution>
                     <id>html, configuration files and images</id>
                     <phase>process-classes</phase>
@@ -69,7 +89,7 @@
                         <goal>copy-resources</goal>
                     </goals>
                     <configuration>
-                        <outputDirectory>${basedir}/target/MapStore2-C027</outputDirectory>
+                        <outputDirectory>${basedir}/target/mapstore2</outputDirectory>
                         <encoding>UTF-8</encoding>
                         <resources>
                             <resource>
@@ -97,7 +117,7 @@
                         <goal>copy-resources</goal>
                     </goals>
                     <configuration>
-                        <outputDirectory>${basedir}/target/MapStore2-C027/dist</outputDirectory>
+                        <outputDirectory>${basedir}/target/mapstore2/dist</outputDirectory>
                         <encoding>UTF-8</encoding>
                         <resources>
                             <resource>
@@ -113,7 +133,7 @@
                         <goal>copy-resources</goal>
                     </goals>
                     <configuration>
-                        <outputDirectory>${basedir}/target/MapStore2-C027/assets</outputDirectory>
+                        <outputDirectory>${basedir}/target/mapstore2/assets</outputDirectory>
                         <encoding>UTF-8</encoding>
                         <resources>
                             <resource>
@@ -129,17 +149,11 @@
                         <goal>copy-resources</goal>
                     </goals>
                     <configuration>
-                        <outputDirectory>${basedir}/target/MapStore2-C027/MapStore2/web/client</outputDirectory>
+                        <outputDirectory>${basedir}/target/mapstore2</outputDirectory>
                         <encoding>UTF-8</encoding>
                         <resources>
                             <resource>
-                                <directory>${basedir}/../js</directory>
-                                <includes>
-                                    <include>translations/*</include>
-                                </includes>
-                            </resource>
-                            <resource>
-                                <directory>${basedir}/../MapStore2/web/client</directory>
+                                <directory>${basedir}/..</directory>
                                 <includes>
                                     <include>translations/*</include>
                                 </includes>
@@ -154,7 +168,7 @@
                         <goal>copy-resources</goal>
                     </goals>
                     <configuration>
-                        <outputDirectory>${basedir}/target/MapStore2-C027/MapStore2/web/client</outputDirectory>
+                        <outputDirectory>${basedir}/target/mapstore2/MapStore2/web/client</outputDirectory>
                         <encoding>UTF-8</encoding>
                         <resources>
                             <resource>
@@ -173,7 +187,7 @@
                         <goal>copy-resources</goal>
                     </goals>
                     <configuration>
-                        <outputDirectory>${basedir}/target/MapStore2-C027/libs/cesium-navigation</outputDirectory>
+                        <outputDirectory>${basedir}/target/mapstore2/libs/cesium-navigation</outputDirectory>
                         <encoding>UTF-8</encoding>
                         <resources>
                             <resource>
@@ -210,7 +224,7 @@
             <version>6.1.20</version>
             <configuration>
                 <webAppConfig>
-                    <contextPath>/MapStore2-C027</contextPath>
+                    <contextPath>/mapstore2</contextPath>
                 </webAppConfig>
                 <connectors>
                     <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
