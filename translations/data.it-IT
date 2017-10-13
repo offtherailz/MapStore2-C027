@@ -2,7 +2,7 @@
     "locale": "it-IT",
     "messages": {
         "home":{
-            "description": "Servizio Informativo territoriale della città metropolitana di Firenze"
+            "description": "Servizio Informativo territoriale del Comune di Firenze"
         }
     }
 }
