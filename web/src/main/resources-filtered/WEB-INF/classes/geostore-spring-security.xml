@@ -108,11 +108,11 @@
 				class="it.geosolutions.geostore.services.rest.security.GeoStoreLdapAuthoritiesPopulator">
 				<constructor-arg ref="contextSource" />
 				<!-- groupSearchBase -->
-				<constructor-arg value="OU=GeoServer,OU=Applicazioni,OU=Gruppi,OU=CdFsys" />
+				<constructor-arg value="OU=CdFsys" />
 				<!-- roleSearchBase -->
-				<constructor-arg value="OU=GeoServer,OU=Applicazioni,OU=Gruppi,OU=CdFsys" />
-				<property name="groupSearchFilter" value="(memberOf={0})" />
-				<property name="roleSearchFilter" value="(memberOf={0})" />
+				<constructor-arg value="OU=CdFsys" />
+				<property name="groupSearchFilter" value="(member={0})" />
+				<property name="roleSearchFilter" value="(member={0})" />
 				<!-- the GeoStore convention is:
 				  * Groups starting with 'ROLE_' will be threated as Auth Roles
 				  * Groups starting withOUT 'ROLE_' will be threated as Groups
