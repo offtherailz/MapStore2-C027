@@ -4,7 +4,7 @@
     "useCORS": []
   },
 	"geoStoreUrl": "/mapstore2/rest/geostore/",
-	"printUrl": "https://demo.geo-solutions.it/geoserver/pdf/info.json",
+  "printUrl": "http://datigis.comune.fi.it/geoserver/pdf/info.json",
   "themePrefix": "MapStore2-C027",
 	"translationsPath": ["./MapStore2/web/client/translations", "./translations"],
   "mapquestApiKey": "__API_KEY_MAPQUEST__",
@@ -47,25 +47,13 @@
                 "isNew": true,
                 "autoload": false
             },
-            "selectedService": "Demo CSW Service",
+            "selectedService": "DatiGIS WMS Service",
             "services": {
-              "Demo CSW Service": {
-                "url": "https://demo.geo-solutions.it/geoserver/csw",
-                "type": "csw",
-                "title": "Demo CSW Service",
-                "autoload": true
-              },
-              "Demo WMS Service": {
-                "url": "https://demo.geo-solutions.it/geoserver/wms",
+              "DatiGIS WMS Service": {
+                "url": "http://datigis.comune.fi.it/geoserver/wms",
                 "type": "wms",
-                "title": "Demo WMS Service",
-                "autoload": false
-              },
-              "Demo WMTS Service": {
-                "url": "https://demo.geo-solutions.it/geoserver/gwc/service/wmts",
-                "type": "wmts",
-                "title": "Demo WMTS Service",
-                "autoload": false
+                "title": "DatiGIS WMS Service",
+                "autoload": true
               }
             }
           }
@@ -257,7 +245,7 @@
                 }
             }, "Tutorial", "MapFooter", {
                 "name": "Measure"
-            }, "Print", "ShapeFile", {
+            },  {
                 "name": "Settings",
                 "cfg": {
                     "wrap": true
