@@ -1,8 +1,8 @@
 {
 	"map": {
-		"projection": "EPSG:900913",
+		"projection": "EPSG:3857",
 		"units": "m",
-		"center": {"x": 1250000.000000, "y": 5370000.000000, "crs": "EPSG:900913"},
+		"center": {"x": 1250000.000000, "y": 5370000.000000, "crs": "EPSG:3857"},
     "zoom":5,
 		"maxExtent": [
 			-20037508.34, -20037508.34,
@@ -10,12 +10,48 @@
 		],
 		"layers": [
 			{
+			 "format": "image/png",
+			 "name": "sfondi:sfondo_colori_DBT_2011", 
+			 "params": {},
+			 "singleTile": false,
+			 "title": "Sfondo Comune Firenze 2011", 
+			 "type": "wms", 
+			 "group": "background", 
+			 "thumbURL": "http://datigis.comune.fi.it/img/thmb_sfondocoloriDBT2011CoFi.png",
+			 "url": "http://tms.comune.fi.it/geowebcache/service/wms",
+			 "visibility": true 
+			 }	,		 
+			{
+			 "format": "image/png",
+			 "name": "sfondi:Ortofoto2017_COL_2K_CoFi", 
+			 "params": {},
+			 "singleTile": false,
+			 "title": "Ortofoto Comune Firenze 2017", 
+			 "type": "wms", 
+			 "group": "background", 
+			 "thumbURL": "http://datigis.comune.fi.it/img/thmb_sfondiOrtofoto2017CoFi.png",
+			 "url": "http://tms.comune.fi.it/geowebcache/service/wms",
+			 "visibility": false 
+			 }	,	
+			{
+			 "format": "image/png",
+			 "name": "sfondi:ortofoto2009", 
+			 "params": {},
+			 "singleTile": false,
+			 "title": "Ortofoto Comune Firenze 2009", 
+			 "type": "wms", 
+			 "group": "background", 
+			 "thumbURL": "http://datigis.comune.fi.it/img/thmb_ortofoto2009CoFi.png",
+			 "url": "http://tms.comune.fi.it/geowebcache/service/wms",
+			 "visibility": false 
+			 }	,			 
+			{
 				"type": "osm",
 				"title": "Open Street Map",
 				"name": "mapnik",
         "source": "osm",
 				"group": "background",
-        "visibility": true
+        "visibility": false
 			},
       {
         "type": "google",
@@ -48,6 +84,13 @@
         "provider": "OpenTopoMap",
         "name": "OpenTopoMap",
         "source": "OpenTopoMap",
+        "group": "background",
+        "visibility": false
+      },
+      {
+        "type": "ol",
+        "title": "None",
+        "source": "ol",
         "group": "background",
         "visibility": false
       }
