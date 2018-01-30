@@ -108,9 +108,9 @@
 				class="it.geosolutions.geostore.services.rest.security.GeoStoreLdapAuthoritiesPopulator">
 				<constructor-arg ref="contextSource" />
 				<!-- groupSearchBase -->
-				<constructor-arg value="OU=CdFsys" />
+				<constructor-arg value="OU=GeoServer,OU=Applicazioni,OU=Gruppi,OU=CdFsys" />
 				<!-- roleSearchBase -->
-				<constructor-arg value="OU=CdFsys" />
+				<constructor-arg value="OU=GeoServer,OU=Applicazioni,OU=Gruppi,OU=CdFsys" />
 				<property name="groupSearchFilter" value="(member={0})" />
 				<property name="roleSearchFilter" value="(member={0})" />
 				<!-- the GeoStore convention is:
@@ -128,8 +128,6 @@
                             <map>
                                 <entry key="ROLE_ADMINISTRATORS" value="ROLE_ADMIN"/>
                                 <entry key="ROLE_DOMAIN ADMINS" value="ROLE_ADMIN"/>
-                                <entry key="Geoserver-Admin" value="ROLE_ADMIN"/>
-                                <entry key="GRP-MapStore2-Admins" value="ROLE_ADMIN"/>
                             </map>
                         </constructor-arg>
                     </bean>
