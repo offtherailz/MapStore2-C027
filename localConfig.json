@@ -1,235 +1,222 @@
 {
-  "proxyUrl": {
-    "url": "/mapstore2/proxy/?url=",
-    "useCORS": []
-  },
-	"geoStoreUrl": "/mapstore2/rest/geostore/",
-  "printUrl": "http://datigis.comune.fi.it/geoserver/pdf/info.json",
-  "themePrefix": "MapStore2-C027",
-	"translationsPath": ["./MapStore2/web/client/translations", "./translations"],
-  "mapquestApiKey": "__API_KEY_MAPQUEST__",
-  "initialMapFilter": "",
-  "ignoreMobileCss" : false,
-  "useAuthenticationRules": true,
-  "defaultMapOptions": {
-    "cesium": {
-        "flyTo": true,
-        "navigationTools": true,
-        "terrainProvider": {
-            "type": "cesium",
-            "url": "https://assets.agi.com/stk-terrain/world",
-            "requestVertexNormals": true
-        }
-    }
-  },
-  "authenticationRules": [
-    {
-      "urlPattern": ".*geostore.*",
-      "method": "basic"
-    }, {
-    "urlPattern": "\\/geoserver.*",
-    "authkeyParamName": "ms2-authkey",
-    "method": "authkey"
-  }],
-  "monitorState": [
-      {"name": "routing", "path": "routing.location.pathname"},
-      {"name": "browser", "path": "browser"},
-      {"name": "featuregridmode", "path": "featuregrid.mode"}],
-    "projectionDefs": [],
-  "initialState": {
-      "defaultState": {
-        "catalog":{
-          "default": {
-            "newService": {
-                "url": "",
-                "type": "wms",
-                "title": "",
-                "isNew": true,
-                "autoload": false
-            },
-            "selectedService": "DatiGIS WMS Service",
-            "services": {
-              "DatiGIS WMS Service": {
-                "url": "http://datigis.comune.fi.it/geoserver/wms",
-                "type": "wms",
-                "title": "DatiGIS WMS Service",
-                "autoload": true
+    "proxyUrl": {
+      "url": "/mapstore2/proxy/?url=",
+      "useCORS": []
+    },
+      "geoStoreUrl": "/mapstore2/rest/geostore/",
+    "printUrl": "http://datigis.comune.fi.it/geoserver/pdf/info.json",
+    "themePrefix": "MapStore2-C027",
+      "translationsPath": ["./MapStore2/web/client/translations", "./translations"],
+    "mapquestApiKey": "__API_KEY_MAPQUEST__",
+    "initialMapFilter": "",
+    "ignoreMobileCss" : false,
+    "useAuthenticationRules": true,
+    "defaultMapOptions": {
+      "cesium": {
+          "flyTo": true,
+          "navigationTools": true,
+          "terrainProvider": {
+              "type": "cesium",
+              "url": "https://assets.agi.com/stk-terrain/world",
+              "requestVertexNormals": true
+          }
+      }
+    },
+    "authenticationRules": [
+      {
+        "urlPattern": ".*geostore.*",
+        "method": "basic"
+      }, {
+      "urlPattern": "\\/geoserver.*",
+      "authkeyParamName": "ms2-authkey",
+      "method": "authkey"
+    }],
+    "monitorState": [
+        {"name": "routing", "path": "routing.location.pathname"},
+        {"name": "browser", "path": "browser"},
+        {"name": "featuregridmode", "path": "featuregrid.mode"}],
+      "projectionDefs": [],
+    "initialState": {
+        "defaultState": {
+          "maptype": {
+            "mapType": "openlayers"
+          },
+          "maps": {
+            "mapType": "openlayers"
+          },
+          "catalog":{
+            "default": {
+              "newService": {
+                  "url": "",
+                  "type": "wms",
+                  "title": "",
+                  "isNew": true,
+                  "autoload": false
+              },
+              "selectedService": "DatiGIS WMS Service",
+              "services": {
+                "DatiGIS WMS Service": {
+                  "url": "http://datigis.comune.fi.it/geoserver/wms",
+                  "type": "wms",
+                  "title": "DatiGIS WMS Service",
+                  "autoload": true
+                }
               }
             }
           }
         }
-      }
-    },
-	"plugins": {
-        "mobile": [{
-                "name": "Map",
-                "cfg": {
-                    "tools": ["locate"]
-                }
-            }, "Version", "DrawerMenu",
-            {
-                "name": "BackgroundSelector",
-                "cfg": {
-                    "bottom": 25,
-                    "dimensions": {
-                    "side": 65,
-                    "sidePreview": 65,
-                    "frame": 3,
-                    "margin": 5,
-                    "label": false,
-                    "vertical": true
-                   }
-                }
-            },
-            {
-                "name": "Identify",
-                "showIn": ["Settings"],
-                "cfg": {
-                    "style": {
-                        "position": "absolute",
-                        "width": "100%",
-                        "bottom": "0px",
-                        "zIndex": 1023,
-                        "maxHeight": "70%",
-                        "marginBottom": 0
-                    },
-                    "draggable": false,
-                    "collapsible": true,
-                    "viewerOptions": {
-                        "container": "{context.ReactSwipe}",
-                        "header": "{context.SwipeHeader}",
-                        "collapsible": false
-                    },
-                    "bodyClass": "mobile-feature-info"
-                }
-            }, {
-                "name": "Locate",
-                "override": {
-                    "Toolbar": {
-                        "alwaysVisible": true
-                    }
-                }
-            }, "Home", {
-                "name": "TOC",
-                "cfg": {
-                    "activateMapTitle": false,
-                    "activateSortLayer": false
-                }
-            }, {
-                "name": "Tutorial",
-                "cfg": {
-                    "preset": "default_mobile_tutorial"
-                }
-            }, {
-                "name": "Settings",
-                "cfg": {
-                    "wrap": true
-                }
-            }, {
-                "name": "Search",
-                "cfg": {
-                    "withToggle": ["max-width: 768px", "min-width: 768px"]
-                }
-            }, {
-                "name": "Toolbar",
-                "id": "NavigationBar",
-                "cfg": {
-                    "id": "navigationBar"
-                }
-            }, "ZoomAll", {
-                "name": "MapLoading",
-                "override": {
-                    "Toolbar": {
-                        "alwaysVisible": true
-                    }
-                }
-            }, "Login",
-            "OmniBar", "BurgerMenu", "Expander", {
-              "name": "Cookie",
-              "cfg": {
-                "externalCookieUrl" : "",
-                "declineUrl" : "http://www.google.com"
-              }
-            }
-        ],
-
-        "desktop": [
-          {
-            "name": "Map",
-            "cfg": {
-              "mapOptions": {
-                "openlayers": {
-                  "attribution": {
-                    "container": "#mapstore-map-footer-container"
+      },
+      "plugins": {
+          "mobile": [{
+                  "name": "Map",
+                  "cfg": {
+                      "tools": ["locate"]
                   }
-                },
-                "leaflet": {
-                  "attribution": {
-                    "container": "#mapstore-map-footer-container"
+              }, "Version", "DrawerMenu",
+              {
+                  "name": "BackgroundSelector",
+                  "cfg": {
+                      "bottom": 25,
+                      "dimensions": {
+                      "side": 65,
+                      "sidePreview": 65,
+                      "frame": 3,
+                      "margin": 5,
+                      "label": false,
+                      "vertical": true
+                     }
                   }
-                }
               },
-              "toolsOptions": {
-                "scalebar": {
-                  "container" : "#mapstore-map-footer-container"
+              {
+                  "name": "Identify",
+                  "showIn": ["Settings"],
+                  "cfg": {
+                      "style": {
+                          "position": "absolute",
+                          "width": "100%",
+                          "bottom": "0px",
+                          "zIndex": 1023,
+                          "maxHeight": "70%",
+                          "marginBottom": 0
+                      },
+                      "draggable": false,
+                      "collapsible": true,
+                      "viewerOptions": {
+                          "container": "{context.ReactSwipe}",
+                          "header": "{context.SwipeHeader}",
+                          "collapsible": false
+                      },
+                      "bodyClass": "mobile-feature-info"
+                  }
+              }, {
+                  "name": "Locate",
+                  "override": {
+                      "Toolbar": {
+                          "alwaysVisible": true
+                      }
+                  }
+              }, "Home", {
+                  "name": "TOC",
+                  "cfg": {
+                      "activateMapTitle": false,
+                      "activateSortLayer": false
+                  }
+              }, {
+                  "name": "Tutorial",
+                  "cfg": {
+                      "preset": "default_mobile_tutorial"
+                  }
+              }, {
+                  "name": "Settings",
+                  "cfg": {
+                      "wrap": true
+                  }
+              }, {
+                  "name": "Search",
+                  "cfg": {
+                      "withToggle": ["max-width: 768px", "min-width: 768px"]
+                  }
+              }, {
+                  "name": "Toolbar",
+                  "id": "NavigationBar",
+                  "cfg": {
+                      "id": "navigationBar"
+                  }
+              }, "ZoomAll", {
+                  "name": "MapLoading",
+                  "override": {
+                      "Toolbar": {
+                          "alwaysVisible": true
+                      }
+                  }
+              }, "Login",
+              "OmniBar", "BurgerMenu", "Expander", {
+                "name": "Cookie",
+                "cfg": {
+                  "externalCookieUrl" : "",
+                  "declineUrl" : "http://www.google.com"
                 }
               }
-            }
-          }, "AutoMapUpdate", {"name": "Share", "cfg": {"showAPI": false}}, "DrawerMenu", "Version", "Notifications", "BackgroundSelector",
+          ],
+  
+          "desktop": [
             {
-                "name": "Identify",
-                "cfg": {
-                    "panelClassName": "mapstore-right-panel modal-content",
-                    "draggable": false,
-                    "collapsible": true,
-                    "viewerOptions": {
-                        "container": "{context.ReactSwipe}",
-                        "header": "{context.SwipeHeader}",
-                        "draggable": false,
-                        "collapsible": false,
-                        "headerOptions": {
-                            "useButtons": true
-                        }
+              "name": "Map",
+              "cfg": {
+                "mapOptions": {
+                  "openlayers": {
+                    "attribution": {
+                      "container": "#mapstore-map-footer-container"
                     }
+                  },
+                  "leaflet": {
+                    "attribution": {
+                      "container": "#mapstore-map-footer-container"
+                    }
+                  }
                 },
-                "override": {
-                  "Toolbar": {
-                    "position": 11,
-                    "alwaysVisible": true
+                "toolsOptions": {
+                  "scalebar": {
+                    "container" : "#mapstore-map-footer-container"
                   }
                 }
-            },
-            {
-                "name": "Locate",
-                "override": {
-                    "Toolbar": {
-                        "alwaysVisible": true
-                    }
-                }
-            }, "Home", "FeatureEditor", "WFSDownload",
-            {
-              "name": "QueryPanel",
-              "cfg": {
-                  "activateQueryTool": true,
-                  "spatialOperations": [
-                      {"id": "INTERSECTS", "name": "queryform.spatialfilter.operations.intersects"},
-                      {"id": "BBOX", "name": "queryform.spatialfilter.operations.bbox"},
-                      {"id": "CONTAINS", "name": "queryform.spatialfilter.operations.contains"},
-                      {"id": "WITHIN", "name": "queryform.spatialfilter.operations.within"}
-                  ],
-                  "spatialMethodOptions": [
-                      {"id": "Viewport", "name": "queryform.spatialfilter.methods.viewport"},
-                      {"id": "BBOX", "name": "queryform.spatialfilter.methods.box"},
-                      {"id": "Circle", "name": "queryform.spatialfilter.methods.circle"},
-                      {"id": "Polygon", "name": "queryform.spatialfilter.methods.poly"}
-                  ]
               }
-
-            }, {
-                "name": "TOC",
+            }, "AutoMapUpdate", {"name": "Share", "cfg": {"showAPI": false}}, "DrawerMenu", "Version", "Notifications", "BackgroundSelector",
+              {
+                  "name": "Identify",
+                  "cfg": {
+                      "panelClassName": "mapstore-right-panel modal-content",
+                      "draggable": false,
+                      "collapsible": true,
+                      "viewerOptions": {
+                          "container": "{context.ReactSwipe}",
+                          "header": "{context.SwipeHeader}",
+                          "draggable": false,
+                          "collapsible": false,
+                          "headerOptions": {
+                              "useButtons": true
+                          }
+                      }
+                  },
+                  "override": {
+                    "Toolbar": {
+                      "position": 11,
+                      "alwaysVisible": true
+                    }
+                  }
+              },
+              {
+                  "name": "Locate",
+                  "override": {
+                      "Toolbar": {
+                          "alwaysVisible": true
+                      }
+                  }
+              }, "Home", "FeatureEditor", "WFSDownload",
+              {
+                "name": "QueryPanel",
                 "cfg": {
                     "activateQueryTool": true,
-                    "activateAddLayerButton": true,
                     "spatialOperations": [
                         {"id": "INTERSECTS", "name": "queryform.spatialfilter.operations.intersects"},
                         {"id": "BBOX", "name": "queryform.spatialfilter.operations.bbox"},
@@ -243,214 +230,234 @@
                         {"id": "Polygon", "name": "queryform.spatialfilter.methods.poly"}
                     ]
                 }
-            }, "Tutorial", "MapFooter", {
-                "name": "Measure"
-            },  {
-                "name": "Settings",
-                "cfg": {
-                    "wrap": true
-                }
-            }, {
-                "name": "MetadataExplorer",
-                "cfg": {
-                    "wrap": true
-                }
-            }, {
-              "name": "About",
-              "showIn": ["BurgerMenu"]
-            }, {
-              "name": "MousePosition",
-              "cfg": {
-                "editCRS": true,
-                "showLabels": true,
-                "showToggle": true,
-                "filterAllowedCRS": ["EPSG:4326", "EPSG:3857"],
-                "additionalCRS": {}
-              }
-            }, {
-                "name": "Search",
-                "cfg": {
-                    "withToggle": ["max-width: 768px", "min-width: 768px"]
-                }
-            }, {
-                "name": "Toolbar",
-                "id": "NavigationBar",
-                "cfg": {
-                    "id": "navigationBar"
-                }
-            },
-            "ScaleBox", {
-              "name":"ZoomAll",
-              "override": {
-                "Toolbar": {
-                  "alwaysVisible": true
-                }
-              }
-            }, {
-                "name": "MapLoading",
-                "override": {
-                    "Toolbar": {
-                        "alwaysVisible": true
-                    }
-                }
-            }, {
-                "name": "ZoomIn",
-                "override": {
-                    "Toolbar": {
-                        "alwaysVisible": true
-                    }
-                }
-            }, {
-                "name": "ZoomOut",
-                "override": {
-                    "Toolbar": {
-                        "alwaysVisible": true
-                    }
-                }
-            }, {
-              "name": "Cookie",
-              "cfg": {
-                "externalCookieUrl" : "",
-                "declineUrl" : "http://www.google.com"
-                }
-            },
-            "OmniBar", "Login", "Save", "SaveAs", "BurgerMenu", "Expander", "Undo", "Redo", "SearchServicesConfig"
-        ],
-        "embedded": [{
-                "name": "Map",
-                "cfg": {
-                    "tools": ["locate"],
-                  "mapOptions": {
-                    "openlayers": {
-                      "attribution": {
-                        "container": "#mapstore-map-footer-container"
-                      }
-                    },
-                    "leaflet": {
-                      "attribution": {
-                        "container": "#mapstore-map-footer-container"
-                      }
-                    }
-                  },
-                  "toolsOptions": {
-                    "scalebar": {
-                      "container" : "#mapstore-map-footer-container"
-                    }
-                  }
-                }
-            }, {
-              "name": "DrawerMenu",
-              "hide": "{!(request.query && request.query.forceDrawer)}"
-              },{
-                  "name": "BackgroundSelector",
+  
+              }, {
+                  "name": "TOC",
                   "cfg": {
-                      "bottom": 40,
-                      "dimensions": {
-                      "side": 65,
-                      "sidePreview": 65,
-                      "frame": 3,
-                      "margin": 5,
-                      "label": false,
-                      "vertical": true
-                     }
+                      "activateQueryTool": true,
+                      "activateAddLayerButton": true,
+                      "spatialOperations": [
+                          {"id": "INTERSECTS", "name": "queryform.spatialfilter.operations.intersects"},
+                          {"id": "BBOX", "name": "queryform.spatialfilter.operations.bbox"},
+                          {"id": "CONTAINS", "name": "queryform.spatialfilter.operations.contains"},
+                          {"id": "WITHIN", "name": "queryform.spatialfilter.operations.within"}
+                      ],
+                      "spatialMethodOptions": [
+                          {"id": "Viewport", "name": "queryform.spatialfilter.methods.viewport"},
+                          {"id": "BBOX", "name": "queryform.spatialfilter.methods.box"},
+                          {"id": "Circle", "name": "queryform.spatialfilter.methods.circle"},
+                          {"id": "Polygon", "name": "queryform.spatialfilter.methods.poly"}
+                      ]
+                  }
+              }, "Tutorial", "MapFooter", {
+                  "name": "Measure"
+              },  {
+                  "name": "Settings",
+                  "cfg": {
+                      "wrap": true
                   }
               }, {
-                "name": "Identify",
+                  "name": "MetadataExplorer",
+                  "cfg": {
+                      "wrap": true
+                  }
+              }, {
+                "name": "About",
+                "showIn": ["BurgerMenu"]
+              }, {
+                "name": "MousePosition",
                 "cfg": {
-                    "style": {
-                        "position": "absolute",
-                        "width": "100%",
-                        "bottom": "0px",
-                        "zIndex": 1010,
-                        "maxHeight": "70%",
-                        "marginBottom": 0
+                  "editCRS": true,
+                  "showLabels": true,
+                  "showToggle": true,
+                  "filterAllowedCRS": ["EPSG:4326", "EPSG:3857"],
+                  "additionalCRS": {}
+                }
+              }, {
+                  "name": "Search",
+                  "cfg": {
+                      "withToggle": ["max-width: 768px", "min-width: 768px"]
+                  }
+              }, {
+                  "name": "Toolbar",
+                  "id": "NavigationBar",
+                  "cfg": {
+                      "id": "navigationBar"
+                  }
+              },
+              "ScaleBox", {
+                "name":"ZoomAll",
+                "override": {
+                  "Toolbar": {
+                    "alwaysVisible": true
+                  }
+                }
+              }, {
+                  "name": "MapLoading",
+                  "override": {
+                      "Toolbar": {
+                          "alwaysVisible": true
+                      }
+                  }
+              }, {
+                  "name": "ZoomIn",
+                  "override": {
+                      "Toolbar": {
+                          "alwaysVisible": true
+                      }
+                  }
+              }, {
+                  "name": "ZoomOut",
+                  "override": {
+                      "Toolbar": {
+                          "alwaysVisible": true
+                      }
+                  }
+              }, {
+                "name": "Cookie",
+                "cfg": {
+                  "externalCookieUrl" : "",
+                  "declineUrl" : "http://www.google.com"
+                  }
+              },
+              "OmniBar", "Login", "Save", "SaveAs", "BurgerMenu", "Expander", "Undo", "Redo", "SearchServicesConfig"
+          ],
+          "embedded": [{
+                  "name": "Map",
+                  "cfg": {
+                      "tools": ["locate"],
+                    "mapOptions": {
+                      "openlayers": {
+                        "attribution": {
+                          "container": "#mapstore-map-footer-container"
+                        }
+                      },
+                      "leaflet": {
+                        "attribution": {
+                          "container": "#mapstore-map-footer-container"
+                        }
+                      }
                     },
-                    "draggable": false,
-                    "collapsible": true,
-                    "viewerOptions": {
-                        "container": "{context.ReactSwipe}",
-                        "header": "{context.SwipeHeader}",
-                        "collapsible": false
-                    },
-                    "bodyClass": "mobile-feature-info"
-                }
-            }, {
-                "name": "ZoomAll",
-                "override": {
-                    "Toolbar": {
-                        "alwaysVisible": true
+                    "toolsOptions": {
+                      "scalebar": {
+                        "container" : "#mapstore-map-footer-container"
+                      }
                     }
-                }
-            }, {
-                "name": "Locate",
-                "override": {
-                    "Toolbar": {
-                        "alwaysVisible": true
+                  }
+              }, {
+                "name": "DrawerMenu",
+                "hide": "{!(request.query && request.query.forceDrawer)}"
+                },{
+                    "name": "BackgroundSelector",
+                    "cfg": {
+                        "bottom": 40,
+                        "dimensions": {
+                        "side": 65,
+                        "sidePreview": 65,
+                        "frame": 3,
+                        "margin": 5,
+                        "label": false,
+                        "vertical": true
+                       }
                     }
-                }
-            }, {
-                "name": "TOC",
-                "cfg": {
-                    "activateMapTitle": false,
-                    "activateSettingsTool": false,
-                    "activateRemoveLayer": false
-                }
-
-            }, "MapFooter", {
-                "name": "Settings",
-                "cfg": {
-                    "wrap": true
-                }
-            }, {
-                "name": "Search",
-                "cfg": {
-                    "withToggle": ["max-width: 768px", "min-width: 768px"]
-                }
-            }, {
-                "name": "Toolbar",
-                "id": "NavigationBar",
-                "cfg": {
-                    "id": "navigationBar"
-                }
-            }, {
-                "name": "MapLoading",
-                "override": {
-                    "Toolbar": {
-                        "alwaysVisible": true
-                    }
-                }
-            }, "Cookie",
-            "OmniBar", {
-                "name": "GoFull",
-                "override": {
-                    "Toolbar": {
-                        "alwaysVisible": true
-                    }
-                }
-            }
-        ],
-        "common": [{
-            "name": "OmniBar",
-            "cfg": {
-                "className": "navbar shadow navbar-home"
-            }
-        }, "ManagerMenu", "Login", "Language", "Attribution", "ScrollTop", "Notifications"],
-        "maps": ["Header", "Fork", "MapSearch", "HomeDescription", "MapType", "ThemeSwitcher",  "GridContainer", "CreateNewMap",
-          {
-            "name": "Maps",
-            "cfg": {
-              "mapsOptions": {
-                "start": 0,
-                "limit": 12
+                }, {
+                  "name": "Identify",
+                  "cfg": {
+                      "style": {
+                          "position": "absolute",
+                          "width": "100%",
+                          "bottom": "0px",
+                          "zIndex": 1010,
+                          "maxHeight": "70%",
+                          "marginBottom": 0
+                      },
+                      "draggable": false,
+                      "collapsible": true,
+                      "viewerOptions": {
+                          "container": "{context.ReactSwipe}",
+                          "header": "{context.SwipeHeader}",
+                          "collapsible": false
+                      },
+                      "bodyClass": "mobile-feature-info"
+                  }
+              }, {
+                  "name": "ZoomAll",
+                  "override": {
+                      "Toolbar": {
+                          "alwaysVisible": true
+                      }
+                  }
+              }, {
+                  "name": "Locate",
+                  "override": {
+                      "Toolbar": {
+                          "alwaysVisible": true
+                      }
+                  }
+              }, {
+                  "name": "TOC",
+                  "cfg": {
+                      "activateMapTitle": false,
+                      "activateSettingsTool": false,
+                      "activateRemoveLayer": false
+                  }
+  
+              }, "MapFooter", {
+                  "name": "Settings",
+                  "cfg": {
+                      "wrap": true
+                  }
+              }, {
+                  "name": "Search",
+                  "cfg": {
+                      "withToggle": ["max-width: 768px", "min-width: 768px"]
+                  }
+              }, {
+                  "name": "Toolbar",
+                  "id": "NavigationBar",
+                  "cfg": {
+                      "id": "navigationBar"
+                  }
+              }, {
+                  "name": "MapLoading",
+                  "override": {
+                      "Toolbar": {
+                          "alwaysVisible": true
+                      }
+                  }
+              }, "Cookie",
+              "OmniBar", {
+                  "name": "GoFull",
+                  "override": {
+                      "Toolbar": {
+                          "alwaysVisible": true
+                      }
+                  }
               }
+          ],
+          "common": [{
+              "name": "OmniBar",
+              "cfg": {
+                  "className": "navbar shadow navbar-home"
+              }
+          }, "ManagerMenu", "Login", "Language", "Attribution", "ScrollTop", "Notifications"],
+          "maps": ["Header", "Fork", "MapSearch", "HomeDescription", "MapType", "ThemeSwitcher",  "GridContainer", "CreateNewMap",
+            {
+              "name": "Maps",
+              "cfg": {
+                "mapsOptions": {
+                  "start": 0,
+                  "limit": 12
+                }
+              }
+            }, "Examples", "Footer", {
+            "name": "Cookie",
+            "cfg": {
+              "externalCookieUrl" : "",
+              "declineUrl" : "http://www.google.com"
             }
-          }, "Examples", "Footer", {
-          "name": "Cookie",
-          "cfg": {
-            "externalCookieUrl" : "",
-            "declineUrl" : "http://www.google.com"
-          }
-        }],
-        "manager": ["Header", "Redirect", "Manager", "Home", "UserManager", "GroupManager", "Footer"]
-    }
-}
+          }],
+          "manager": ["Header", "Redirect", "Manager", "Home", "UserManager", "GroupManager", "Footer"]
+      }
+  }
+  
