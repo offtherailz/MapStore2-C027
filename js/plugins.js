@@ -76,7 +76,8 @@ module.exports = {
         FeatureEditorPlugin: require('../MapStore2/web/client/plugins/FeatureEditor'),
         AutoMapUpdatePlugin: require('../MapStore2/web/client/plugins/AutoMapUpdate'),
         MapFooterPlugin: require('../MapStore2/web/client/plugins/MapFooter'),
-        AnnotationsPlugin: require('../MapStore2/web/client/plugins/Annotations')
+        AnnotationsPlugin: require('../MapStore2/web/client/plugins/Annotations'),
+        DetailsPlugin: require('../MapStore2/web/client/plugins/Details')
     },
     requires: {
         ReactSwipe: require('react-swipeable-views').default,

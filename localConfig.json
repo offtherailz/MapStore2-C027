@@ -10,6 +10,7 @@
     "mapquestApiKey": "__API_KEY_MAPQUEST__",
     "initialMapFilter": "",
     "ignoreMobileCss" : false,
+    "loadAfterTheme": true,
     "useAuthenticationRules": true,
     "defaultMapOptions": {
       "cesium": {
@@ -91,14 +92,8 @@
                   "name": "Identify",
                   "showIn": ["Settings"],
                   "cfg": {
-                      "style": {
-                          "position": "absolute",
-                          "width": "100%",
-                          "bottom": "0px",
-                          "zIndex": 1023,
-                          "maxHeight": "70%",
-                          "marginBottom": 0
-                      },
+                      "panelClassName": "mapstore-mobile-identify",
+                      "fullscreen": true,
                       "draggable": false,
                       "collapsible": true,
                       "viewerOptions": {
@@ -159,7 +154,7 @@
               }
           ],
   
-          "desktop": [
+          "desktop": ["Details",
             {
               "name": "Map",
               "cfg": {
@@ -200,8 +195,7 @@
                   },
                   "override": {
                     "Toolbar": {
-                      "position": 11,
-                      "alwaysVisible": true
+                      "position": 11
                     }
                   }
               },
@@ -320,7 +314,7 @@
                   "declineUrl" : "http://www.google.com"
                   }
               },
-              "OmniBar", "Login", "Save", "SaveAs", "BurgerMenu", "Expander", "Undo", "Redo", "SearchServicesConfig"
+              "OmniBar", "Login", "Save", "SaveAs", "BurgerMenu", "Expander", "Undo", "Redo", "SearchServicesConfig", "ShapeFile"
           ],
           "embedded": [{
                   "name": "Map",
@@ -363,14 +357,8 @@
                 }, {
                   "name": "Identify",
                   "cfg": {
-                      "style": {
-                          "position": "absolute",
-                          "width": "100%",
-                          "bottom": "0px",
-                          "zIndex": 1010,
-                          "maxHeight": "70%",
-                          "marginBottom": 0
-                      },
+                      "panelClassName": "mapstore-mobile-identify",
+                      "fullscreen": true,
                       "draggable": false,
                       "collapsible": true,
                       "viewerOptions": {
@@ -426,14 +414,7 @@
                       }
                   }
               }, "Cookie",
-              "OmniBar", {
-                  "name": "GoFull",
-                  "override": {
-                      "Toolbar": {
-                          "alwaysVisible": true
-                      }
-                  }
-              }
+              "OmniBar"
           ],
           "common": [{
               "name": "OmniBar",
