@@ -54,15 +54,21 @@
                   "isNew": true,
                   "autoload": false
               },
-              "selectedService": "DatiGIS WMS Service",
-              "services": {
-                "DatiGIS WMS Service": {
-                  "url": "http://datigis.comune.fi.it/geoserver/wms",
-                  "type": "wms",
-                  "title": "DatiGIS WMS Service",
-                  "autoload": true
-                }
-              }
+              "selectedService": "GeoServer ComuneFI intranet WMS",
+            "services": {
+              "GeoServer ComuneFI intranet WMS": {
+                "url": "http://datigis.comune.intranet/geoserver/wms",
+                "type": "wms",
+                "title": "GeoServer ComuneFI intranet WMS",
+                "autoload": true
+              },
+				"GeoWebCache ComuneFI intranet WMTS": {
+                "url": "http://tms.comune.intranet/geowebcache_internal/service/wmts",
+                "type": "wmts",
+                "title": "GeoWebCache ComuneFI intranet WMTS",
+                "autoload": true
+              }			  
+            }
             }
           }
         }

@@ -96,7 +96,7 @@
 				<property name="userSearch">
 					<bean id="userSearch"
 						class="org.springframework.security.ldap.search.FilterBasedLdapUserSearch">
-                        <constructor-arg index="0" value="OU=SIT-SistemiTerritoriali,OU=Dir09-SistemiInformativi,OU=Direzioni,ou=Utenti,ou=CdF" />
+                        <constructor-arg index="0" value="OU=Direzioni,ou=Utenti,ou=CdF" />
                         <constructor-arg index="1" value="(sAMAccountName={0})" />
 						<constructor-arg index="2" ref="contextSource" />
 					</bean>
@@ -108,9 +108,9 @@
 				class="it.geosolutions.geostore.services.rest.security.GeoStoreLdapAuthoritiesPopulator">
 				<constructor-arg ref="contextSource" />
 				<!-- groupSearchBase -->
-				<constructor-arg value="OU=GeoServer,OU=Applicazioni,OU=Gruppi,OU=CdFsys" />
+				<constructor-arg value="OU=SIT-SistemiTerritoriali,OU=Dir09-SistemiInformativi,OU=Direzioni,ou=Utenti,ou=CdF" />
 				<!-- roleSearchBase -->
-				<constructor-arg value="OU=GeoServer,OU=Applicazioni,OU=Gruppi,OU=CdFsys" />
+				<constructor-arg value="OU=SIT-SistemiTerritoriali,OU=Dir09-SistemiInformativi,OU=Direzioni,ou=Utenti,ou=CdF" />
 				<property name="groupSearchFilter" value="(member={0})" />
 				<property name="roleSearchFilter" value="(member={0})" />
 				<!-- the GeoStore convention is:
@@ -128,6 +128,7 @@
                             <map>
                                 <entry key="ROLE_ADMINISTRATORS" value="ROLE_ADMIN"/>
                                 <entry key="ROLE_DOMAIN ADMINS" value="ROLE_ADMIN"/>
+								<entry key="ROLE_GRP-SIT-ALL" value="ROLE_ADMIN"/>
                             </map>
                         </constructor-arg>
                     </bean>
