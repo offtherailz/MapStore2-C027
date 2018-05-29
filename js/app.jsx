@@ -18,6 +18,7 @@ const startApp = () => {
     const {versionSelector} = require('../MapStore2/web/client/selectors/version');
     const {loadAfterThemeSelector} = require('../MapStore2/web/client/selectors/config');
     const {updateMapLayoutEpic} = require('../MapStore2/web/client/epics/maplayout');
+    const {setSupportedLocales} = require('../MapStore2/web/client/epics/localconfig');
     const StandardApp = require('../MapStore2/web/client/components/app/StandardApp');
 
     const {pages, pluginsDef, initialState, storeOpts, appEpics = {}} = require('./appConfig');
@@ -42,7 +43,7 @@ const startApp = () => {
         maptype: require('../MapStore2/web/client/reducers/maptype'),
         maps: require('../MapStore2/web/client/reducers/maps'),
         maplayout: require('../MapStore2/web/client/reducers/maplayout')
-    }, {...appEpics, updateMapLayoutEpic});
+    }, {...appEpics, updateMapLayoutEpic, setSupportedLocales});
 
     const initialActions = [
         () => loadMaps(ConfigUtils.getDefaults().geoStoreUrl, ConfigUtils.getDefaults().initialMapFilter || "*"),
