@@ -2,7 +2,7 @@
     "locale": "it-IT",
     "messages": {
         "home":{
-            "description": "Servizio Informativo territoriale del Comune di Firenze"
+            "shortDescription": "Risorse Dati e Sistema Informativo Territoriale del Comune di Firenze"
         }
     }
 }
