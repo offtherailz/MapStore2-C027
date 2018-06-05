@@ -258,7 +258,10 @@
                         {"id": "BBOX", "name": "queryform.spatialfilter.methods.box"},
                         {"id": "Circle", "name": "queryform.spatialfilter.methods.circle"},
                         {"id": "Polygon", "name": "queryform.spatialfilter.methods.poly"}
-                    ]
+                    ],
+                    "toolsOptions": {
+                        "hideCrossLayer": true
+                    }
                 }
               }, {
                   "name": "TOC",
