@@ -221,19 +221,6 @@
                 }
               }
             }, "AutoMapUpdate", {"name": "Share", "cfg": {"showAPI": false}}, "DrawerMenu", "Version", "Notifications", "BackgroundSelector",
-            {
-                "name": "Identify",
-                "cfg": {
-                    "viewerOptions": {
-                        "container": "{context.ReactSwipe}"
-                    }
-                },
-                "override": {
-                  "Toolbar": {
-                    "position": 11
-                  }
-                }
-            },
               {
                   "name": "Locate",
                   "override": {
@@ -294,9 +281,22 @@
               }, {
                   "name": "MetadataExplorer",
                   "cfg": {
-                      "wrap": true
+                      "wrap": true,
+                      "zoomToLayer": false
                   }
-              }, {
+              },{
+                "name": "Identify",
+                "cfg": {
+                    "viewerOptions": {
+                        "container": "{context.ReactSwipe}"
+                    }
+                },
+                "override": {
+                  "Toolbar": {
+                    "position": 11
+                  }
+                }
+            }, {
                 "name": "About",
                 "showIn": ["BurgerMenu"]
               }, {
