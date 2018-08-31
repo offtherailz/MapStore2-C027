@@ -44,6 +44,18 @@
 			 "thumbURL": "http://datigis.comune.fi.it/img/thmb_ortofoto2009CoFi.png",
 			 "url": "http://tms.comune.fi.it/geowebcache/service/wms",
 			 "visibility": false 
+			 }	,			
+			{
+			 "format": "image/png",
+			 "name": "DBT2K:DBT_2K", 
+			 "params": {},
+			 "singleTile": false,
+			 "title": "Database Topografico Comune Firenze", 
+			 "type": "wms", 
+			 "group": "background", 
+			 "thumbURL": "http://datigis.comune.fi.it/img/thmb_dbt2k.png",
+			 "url": "http://tms.comune.intranet/geowebcache_internal/service/wms",
+			 "visibility": false 
 			 }	,			 
 			{
 				"type": "osm",
@@ -66,15 +78,6 @@
         "title": "MapQuest OSM",
         "name": "osm",
         "source": "mapquest",
-        "group": "background",
-        "visibility": false
-      },
-      {
-        "type": "tileprovider",
-        "title": "NASAGIBS Night 2012",
-        "provider": "NASAGIBS.ViirsEarthAtNight2012",
-        "name": "Night2012",
-        "source": "nasagibs",
         "group": "background",
         "visibility": false
       },
