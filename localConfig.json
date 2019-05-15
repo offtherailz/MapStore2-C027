@@ -26,7 +26,7 @@
     "authenticationRules": [
       {
         "urlPattern": ".*geostore.*",
-        "method": "basic"
+        "method": "bearer"
       }, {
       "urlPattern": "\\/geoserver.*",
       "authkeyParamName": "ms2-authkey",
@@ -36,7 +36,14 @@
         {"name": "routing", "path": "routing.location.pathname"},
         {"name": "browser", "path": "browser"},
         {"name": "featuregridmode", "path": "featuregrid.mode"}],
-      "projectionDefs": [],
+    "projectionDefs": [
+        {
+            "code": "EPSG:3003",
+            "def": "+proj=tmerc +lat_0=0 +lon_0=9 +k=0.9996 +x_0=1500000 +y_0=0 +ellps=intl +towgs84=-104.1,-49.1,-9.9,0.971,-2.917,0.714,-11.68 +units=m +no_defs",
+            "extent": [1241482.0019, 973563.1609, 1830078.9331, 5215189.0853],
+            "worldExtent": [6.6500, 8.8000, 12.0000, 47.0500]
+        }
+    ],
     "initialState": {
         "defaultState": {
             "locales": {
@@ -57,7 +64,7 @@
                 }
             },
           "maptype": {
-            "mapType": "openlayers"
+            "mapType": "{context.mode === 'desktop' ? 'openlayers' : 'leaflet'}"
           },
           "maps": {
             "mapType": "openlayers"
@@ -94,6 +101,14 @@
           "mobile": [{
                   "name": "Map",
                   "cfg": {
+                    "mapOptions": {
+                        "openlayers": {
+                          "interactions": {
+                            "pinchRotate": false,
+                            "altShiftDragRotate": false
+                          }
+                        }
+                      },
                       "tools": ["locate"]
                   }
               }, "Version", "DrawerMenu",
@@ -112,21 +127,18 @@
                   }
               },
               {
-                  "name": "Identify",
-                  "showIn": ["Settings"],
-                  "cfg": {
-                      "panelClassName": "mapstore-mobile-identify",
-                      "fullscreen": true,
-                      "draggable": false,
-                      "collapsible": true,
-                      "viewerOptions": {
-                          "container": "{context.ReactSwipe}",
-                          "header": "{context.SwipeHeader}",
-                          "collapsible": false
-                      },
-                      "bodyClass": "mobile-feature-info"
-                  }
-              }, {
+                "name": "Identify",
+                "showIn": ["Settings"],
+                "cfg": {
+                    "showFullscreen": true,
+                    "position": "bottom",
+                    "size": 0.5,
+                    "fluid": true,
+                    "viewerOptions": {
+                        "container": "{context.ReactSwipe}"
+                    }
+                }
+            }, {
                   "name": "Locate",
                   "override": {
                       "Toolbar": {
@@ -136,10 +148,16 @@
               }, "Home", {
                   "name": "TOC",
                   "cfg": {
+                      "activateMetedataTool": false,
                       "activateMapTitle": false,
                       "activateSortLayer": false
                   }
               }, {
+                "name": "TOCItemsSettings",
+                "cfg": {
+                    "width": 300
+                }
+            }, {
                   "name": "Tutorial",
                   "cfg": {
                       "preset": "default_mobile_tutorial"
@@ -176,13 +194,16 @@
                 }
               }
           ],
-  
-          "desktop": ["Details",
+          "desktop": [ "Details",
             {
               "name": "Map",
               "cfg": {
                 "mapOptions": {
                   "openlayers": {
+                    "interactions": {
+                        "pinchRotate": false,
+                        "altShiftDragRotate": false
+                      },
                     "attribution": {
                       "container": "#mapstore-map-footer-container"
                     }
@@ -201,35 +222,14 @@
               }
             }, "AutoMapUpdate", {"name": "Share", "cfg": {"showAPI": false}}, "DrawerMenu", "Version", "Notifications", "BackgroundSelector",
               {
-                  "name": "Identify",
-                  "cfg": {
-                      "panelClassName": "mapstore-right-panel modal-content",
-                      "draggable": false,
-                      "collapsible": true,
-                      "viewerOptions": {
-                          "container": "{context.ReactSwipe}",
-                          "header": "{context.SwipeHeader}",
-                          "draggable": false,
-                          "collapsible": false,
-                          "headerOptions": {
-                              "useButtons": true
-                          }
-                      }
-                  },
-                  "override": {
-                    "Toolbar": {
-                      "position": 11
-                    }
-                  }
-              },
-              {
                   "name": "Locate",
                   "override": {
                       "Toolbar": {
                           "alwaysVisible": true
                       }
                   }
-              }, "Home", "FeatureEditor", "WFSDownload",
+              }, "Home", "FeatureEditor",
+              "WFSDownload",
               {
                 "name": "QueryPanel",
                 "cfg": {
@@ -245,14 +245,17 @@
                         {"id": "BBOX", "name": "queryform.spatialfilter.methods.box"},
                         {"id": "Circle", "name": "queryform.spatialfilter.methods.circle"},
                         {"id": "Polygon", "name": "queryform.spatialfilter.methods.poly"}
-                    ]
+                    ],
+                    "toolsOptions": {
+                        "hideCrossLayer": true
+                    }
                 }
-  
               }, {
                   "name": "TOC",
                   "cfg": {
                       "activateQueryTool": true,
                       "activateAddLayerButton": true,
+                      "activateMetedataTool": false,
                       "spatialOperations": [
                           {"id": "INTERSECTS", "name": "queryform.spatialfilter.operations.intersects"},
                           {"id": "BBOX", "name": "queryform.spatialfilter.operations.bbox"},
@@ -266,7 +269,9 @@
                           {"id": "Polygon", "name": "queryform.spatialfilter.methods.poly"}
                       ]
                   }
-              }, "Tutorial", "MapFooter", {
+              },
+              "TOCItemsSettings",
+              "Tutorial", "MapFooter", {
                   "name": "Measure"
               },  {
                   "name": "Settings",
@@ -276,9 +281,22 @@
               }, {
                   "name": "MetadataExplorer",
                   "cfg": {
-                      "wrap": true
+                      "wrap": true,
+                      "zoomToLayer": false
                   }
-              }, {
+              },{
+                "name": "Identify",
+                "cfg": {
+                    "viewerOptions": {
+                        "container": "{context.ReactSwipe}"
+                    }
+                },
+                "override": {
+                  "Toolbar": {
+                    "position": 11
+                  }
+                }
+            }, {
                 "name": "About",
                 "showIn": ["BurgerMenu"]
               }, {
@@ -345,6 +363,10 @@
                       "tools": ["locate"],
                     "mapOptions": {
                       "openlayers": {
+                        "interactions": {
+                            "pinchRotate": false,
+                            "altShiftDragRotate": false
+                          },
                         "attribution": {
                           "container": "#mapstore-map-footer-container"
                         }
@@ -378,20 +400,17 @@
                        }
                     }
                 }, {
-                  "name": "Identify",
-                  "cfg": {
-                      "panelClassName": "mapstore-mobile-identify",
-                      "fullscreen": true,
-                      "draggable": false,
-                      "collapsible": true,
-                      "viewerOptions": {
-                          "container": "{context.ReactSwipe}",
-                          "header": "{context.SwipeHeader}",
-                          "collapsible": false
-                      },
-                      "bodyClass": "mobile-feature-info"
-                  }
-              }, {
+                    "name": "Identify",
+                    "cfg": {
+                        "showFullscreen": true,
+                        "position": "bottom",
+                        "size": 0.5,
+                        "fluid": true,
+                        "viewerOptions": {
+                            "container": "{context.ReactSwipe}"
+                        }
+                    }
+                }, {
                   "name": "ZoomAll",
                   "override": {
                       "Toolbar": {
@@ -410,6 +429,7 @@
                   "cfg": {
                       "activateMapTitle": false,
                       "activateSettingsTool": false,
+                      "activateMetedataTool": false,
                       "activateRemoveLayer": false
                   }
   
@@ -445,11 +465,17 @@
                   "className": "navbar shadow navbar-home"
               }
           }, "ManagerMenu", "Login", "Language", "Attribution", "ScrollTop", "Notifications"],
-          "maps": ["Header", "Fork", "MapSearch", "HomeDescription", "MapType", "ThemeSwitcher",  "GridContainer", 
+          "maps": [{
+              "name": "HomeDescription",
+              "cfg": {
+                  "name": " "
+              }
+            }, "MapSearch",  "GridContainer",
             {
                 "name": "CreateNewMap",
                 "cfg": {
-                    "allowedRoles": ["ADMIN"]
+                    "allowedRoles": ["ADMIN"],
+                    "showNewDashboard": false
                 }
             },
             {
@@ -460,7 +486,7 @@
                   "limit": 12
                 }
               }
-            }, "Examples", "Footer", {
+            }, "Footer", {
             "name": "Cookie",
             "cfg": {
               "externalCookieUrl" : "",

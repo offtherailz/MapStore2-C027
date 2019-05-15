@@ -61,28 +61,18 @@ html, body, #map {
     opacity: 0.7;
     top: 5px;
 }
-
-.MapStore2-C027 .page-maps .MapSearchBar.maps-search {
-    top: 50px !important;
+.MapStore2-C027 #page-maps.page-maps .ms-home-description {
+    background-image: none !important;
 }
-
-.MapStore2-C027 .page-maps .MapSearchBar.maps-search input {
-    z-index: 0;
+.MapStore2-C027 #page-maps.page-maps .ms-home-description h1 {
+    background-image: url(../img/logo.png);
+    background-size: 60px 60px;
+    margin-top: 40px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
-
-.MapStore2-C027 .page-maps .mapstore-header {
-    background-image: url(../img/logo.png) !important;
-    background-size: 60px 60px !important;
-    margin-top: 40px !important;
-    height: 60px !important;
-}
-
-.MapStore2-C027 .mapstore-home-description {
-    text-align: center;
-    margin-top: 20px !important;
-    top: -80px !important;
-    position: relative !important;
-    font-size: 20px;
+.MapStore2-C027 #page-maps.page-maps .ms-home-description p {
     font-weight: bold;
 }
 

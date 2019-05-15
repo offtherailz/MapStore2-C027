@@ -33,13 +33,16 @@ const startApp = () => {
     }));
 
     const StandardRouter = connect(routerSelector)(require('../MapStore2/web/client/components/app/StandardRouter'));
+    const {updateMapLayoutEpic} = require('../MapStore2/web/client/epics/maplayout');
 
     const appStore = require('../MapStore2/web/client/stores/StandardStore').bind(null, initialState, {
         mode: (state = 'embedded') => state,
-        version: require('../MapStore2/web/client/reducers/version')
-    }, {});
+        version: require('../MapStore2/web/client/reducers/version'),
+        maplayout: require('../MapStore2/web/client/reducers/maplayout')
+    }, {updateMapLayoutEpic});
 
     const appConfig = {
+        mode: 'embedded',
         storeOpts,
         appStore,
         pluginsDef,

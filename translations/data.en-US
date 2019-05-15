@@ -2,7 +2,7 @@
     "locale": "en-US",
     "messages": {
         "home":{
-            "description": "Servizio Informativo territoriale della città metropolitana di Firenze"
+            "shortDescription": "Risorse Dati e Sistema Informativo Territoriale del Comune di Firenze"
         }
     }
 }
