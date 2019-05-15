@@ -113,6 +113,10 @@
 				<constructor-arg value="OU=SIT-SistemiTerritoriali,OU=Dir09-SistemiInformativi,OU=Direzioni,ou=Utenti,ou=CdF" />
 				<property name="groupSearchFilter" value="(member={0})" />
 				<property name="roleSearchFilter" value="(member={0})" />
+				<!-- nested groups support -->
+				<property name="enableHierarchicalGroups" value="true" />
+				<property name="groupInGroupSearchFilter" value="(member={0})" />
+				<property name="maxLevelGroupsSearch" value="10" />
 				<!-- the GeoStore convention is:
 				  * Groups starting with 'ROLE_' will be threated as Auth Roles
 				  * Groups starting withOUT 'ROLE_' will be threated as Groups
