@@ -1,12 +1,17 @@
 {
     "proxyUrl": {
       "url": "/mapstore2/proxy/?url=",
-      "useCORS": ["http://sr-vm113-sitgn1","http://sr-vm277-sitgn2","http://datigis.comune.intranet","http://datigis.comune.fi.it","http://datigis2.comune.intranet"]
+      "useCORS": [
+        "http://sr-vm113-sitgn1",
+        "http://sr-vm277-sitgn2",
+        "http://datigis.comune.intranet",
+        "http://datigis.comune.fi.it",
+        "http://datigis2.comune.intranet"]
     },
-      "geoStoreUrl": "/mapstore2/rest/geostore/",
+    "geoStoreUrl": "/mapstore2/rest/geostore/",
     "printUrl": "http://datigis.comune.fi.it/geoserver/pdf/info.json",
     "themePrefix": "MapStore2-C027",
-      "translationsPath": ["./MapStore2/web/client/translations", "./translations"],
+    "translationsPath": ["./MapStore2/web/client/translations", "./translations"],
     "mapquestApiKey": "__API_KEY_MAPQUEST__",
     "initialMapFilter": "",
     "ignoreMobileCss" : false,
@@ -28,14 +33,15 @@
         "urlPattern": ".*geostore.*",
         "method": "bearer"
       }, {
-      "urlPattern": "\\/geoserver.*",
-      "authkeyParamName": "ms2-authkey",
-      "method": "authkey"
+        "urlPattern": "\\/geoserver.*",
+        "authkeyParamName": "ms2-authkey",
+        "method": "authkey"
     }],
     "monitorState": [
         {"name": "routing", "path": "routing.location.pathname"},
         {"name": "browser", "path": "browser"},
-        {"name": "featuregridmode", "path": "featuregrid.mode"}],
+        {"name": "featuregridmode", "path": "featuregrid.mode"},
+        {"name": "user", "path": "security.user"}],
     "projectionDefs": [
         {
             "code": "EPSG:3003",
@@ -91,13 +97,13 @@
                 "type": "wms",
                 "title": "GeoServer Urbanistica ComuneFI intranet WMS",
                 "autoload": true
-              },			  
+              },
 				"GeoWebCache ComuneFI intranet WMTS": {
                 "url": "http://tms.comune.intranet/geowebcache_internal/service/wmts",
                 "type": "wmts",
                 "title": "GeoWebCache ComuneFI intranet WMTS",
                 "autoload": true
-              }			  
+              }
             }
             }
           }
@@ -234,7 +240,12 @@
                           "alwaysVisible": true
                       }
                   }
-              }, "Home", "FeatureEditor",
+              }, "Home", "FeatureEditor",  {
+                  "name": "WFSDownload",
+                  "cfg": {
+                    "disablePluginIf": "{!state('user')}"
+                  }
+              },
               {
                 "name": "QueryPanel",
                 "cfg": {
@@ -437,7 +448,7 @@
                       "activateMetedataTool": false,
                       "activateRemoveLayer": false
                   }
-  
+
               }, "MapFooter", {
                   "name": "Settings",
                   "cfg": {
@@ -501,4 +512,3 @@
           "manager": ["Header", "Redirect", "Manager", "Home", "UserManager", "GroupManager", "Footer"]
       }
   }
-  
