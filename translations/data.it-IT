@@ -2,7 +2,7 @@
     "locale": "it-IT",
     "messages": {
         "home":{
-            "shortDescription": "Risorse Dati e Sistema Informativo Territoriale del Comune di Firenze"
+            "shortDescription": "<b>Risorse Dati e Sistema Informativo Territoriale del Comune di Firenze</b><br/><font size=-1>***Le informazioni contenute nella cartografia rappresentano la migliore conoscenza disponibile ad oggi delle infrastrutture gestite;<br/> alcune possono contenere errori, alcune hanno carattere di mappatura indicativa del servizio e non esaustiva, altre sono soggette ad aggiornamento<br/> periodico mensile o bimestrale o senza cadenza fissa. Per tali informazioni potete accedere al catalogo dei metadati o contattare l’ufficio SIT.</font>"
         }
     }
 }
