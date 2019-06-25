@@ -78,6 +78,14 @@ module.exports = {
         MapFooterPlugin: require('../MapStore2/web/client/plugins/MapFooter'),
         AnnotationsPlugin: require('../MapStore2/web/client/plugins/Annotations'),
         DetailsPlugin: require('../MapStore2/web/client/plugins/Details'),
+        Dashboard: require('../MapStore2/web/client/plugins/Dashboard'),
+        DashboardEditor: require('../MapStore2/web/client/plugins/DashboardEditor'),
+        WidgetsPlugin: require('../MapStore2/web/client/plugins/Widgets'),
+        WidgetsTrayPlugin: require('../MapStore2/web/client/plugins/WidgetsTray'),
+        WidgetsBuilderPlugin: require('../MapStore2/web/client/plugins/WidgetsBuilder'),
+        TimelinePlugin: require('../MapStore2/web/client/plugins/Timeline'),
+        FeedbackMaskPlugin: require('../MapStore2/web/client/plugins/FeedbackMask'),
+        NavMenu: require('../MapStore2/web/client/product/plugins/NavMenu'),
         TOCItemsSettingsPlugin: require('../MapStore2/web/client/plugins/TOCItemsSettings')
     },
     requires: {

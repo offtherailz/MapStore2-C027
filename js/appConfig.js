@@ -20,6 +20,10 @@ module.exports = {
         path: "/viewer/:mapType/:mapId",
         component: require('../MapStore2/web/client/product/pages/MapViewer')
     }, {
+        name: "dashboard",
+        path: "/dashboard",
+        component: require('../MapStore2/web/client/product/pages/Dashboard')
+    }, {
         name: "manager",
         path: "/manager",
         component: require('../MapStore2/web/client/product/pages/Manager')
