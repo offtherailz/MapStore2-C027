@@ -24,6 +24,10 @@ module.exports = {
         path: "/dashboard",
         component: require('../MapStore2/web/client/product/pages/Dashboard')
     }, {
+        name: "dashboard",
+        path: "/dashboard/:did",
+        component: require('../MapStore2/web/client/product/pages/Dashboard')
+    }, {
         name: "manager",
         path: "/manager",
         component: require('../MapStore2/web/client/product/pages/Manager')

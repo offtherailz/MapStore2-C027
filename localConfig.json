@@ -490,14 +490,14 @@
               "cfg": {
                   "name": " "
               }
-            }, "MapSearch",  "GridContainer",
+            }, "MapSearch",
             {
                 "name": "CreateNewMap",
                 "cfg": {
                     "allowedRoles": ["ADMIN"]
                 }
             },
-            {
+            "ContentTabs", {
               "name": "Maps",
               "cfg": {
                 "mapsOptions": {
