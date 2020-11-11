@@ -531,7 +531,7 @@
             "name": "DashboardEditor",
             "cfg": {
                "catalog": {
-                "url": "http://datigis.comune.fi.it/geoserver/csw",
+                "url": "https://datigis.comune.fi.it/geoserver/csw",
                 "type": "csw",
                 "title": "GeoServer ComuneFI CSW",
                 "autoload": true
