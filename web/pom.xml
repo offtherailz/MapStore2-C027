@@ -13,23 +13,30 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <tomcat.version>7.0.86</tomcat.version>
   </properties>
 
   <dependencies>
+  <!-- MapStore backend -->
+    <dependency>
+      <groupId>it.geosolutions.mapstore</groupId>
+      <artifactId>mapstore-backend</artifactId>
+      <version>1.1.2</version>
+    </dependency>
     <!-- ================================================================ -->
     <!-- GeoStore modules -->
     <!-- ================================================================ -->
     <dependency>
       <groupId>it.geosolutions.geostore</groupId>
       <artifactId>geostore-webapp</artifactId>
-      <version>1.4.3-SNAPSHOT</version>
+      <version>1.6.0</version>
       <type>war</type>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>proxy</groupId>
       <artifactId>http_proxy</artifactId>
-      <version>1.1-SNAPSHOT</version>
+      <version>1.1.0</version>
       <type>war</type>
       <scope>runtime</scope>
     </dependency>
@@ -38,7 +45,7 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
-      <version>4.4</version>
+      <version>4.13.1</version>
     </dependency>
     <!--  mockito -->
     <dependency>
@@ -52,6 +59,18 @@
           <groupId>javax.servlet</groupId>
           <artifactId>servlet-api</artifactId>
           <version>2.5</version>
+    </dependency>
+    <!-- gzip compression filter -->
+    <dependency>
+        <groupId>net.sf.ehcache</groupId>
+        <artifactId>ehcache-web</artifactId>
+        <version>2.0.4</version>
+    </dependency>
+    <!-- misc -->
+    <dependency>
+        <groupId>commons-pool</groupId>
+        <artifactId>commons-pool</artifactId>
+        <version>1.5.4</version>
     </dependency>
   </dependencies>
 
@@ -139,6 +158,52 @@
                                 <directory>${basedir}}/../dist</directory>
                                 <includes>
                                     <include>embedded.html</include>
+                                </includes>
+                                <excludes>
+                                    <exclude>MapStore2/*</exclude>
+                                    <exclude>MapStore2/**/*</exclude>
+                                </excludes>
+                            </resource>
+                        </resources>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>only dashboard-embedded.html</id>
+                    <phase>process-classes</phase>
+                    <goals>
+                        <goal>copy-resources</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>${basedir}/target/__PROJECTNAME__</outputDirectory>
+                        <encoding>UTF-8</encoding>
+                        <resources>
+                            <resource>
+                                <directory>${basedir}/../dist</directory>
+                                <includes>
+                                    <include>dashboard-embedded.html</include>
+                                </includes>
+                                <excludes>
+                                    <exclude>MapStore2/*</exclude>
+                                    <exclude>MapStore2/**/*</exclude>
+                                </excludes>
+                            </resource>
+                        </resources>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>only geostory-embedded.html</id>
+                    <phase>process-classes</phase>
+                    <goals>
+                        <goal>copy-resources</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>${basedir}/target/__PROJECTNAME__</outputDirectory>
+                        <encoding>UTF-8</encoding>
+                        <resources>
+                            <resource>
+                                <directory>${basedir}/../dist</directory>
+                                <includes>
+                                    <include>geostory-embedded.html</include>
                                 </includes>
                                 <excludes>
                                     <exclude>MapStore2/*</exclude>
@@ -249,13 +314,32 @@
                     </configuration>
                 </execution>
                 <execution>
+                    <id>printing</id>
+                    <phase>process-classes</phase>
+                    <goals>
+                        <goal>copy-resources</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>${basedir}/target/mapstore2/printing</outputDirectory>
+                        <encoding>UTF-8</encoding>
+                        <resources>
+                            <resource>
+                                <directory>${basedir}/../MapStore2/resources/geoserver/print</directory>
+                                <includes>
+                                    <include>*</include>
+                                </includes>
+                            </resource>
+                        </resources>
+                    </configuration>
+                </execution>
+                <execution>
                     <id>CesiumJS-navigation</id>
                     <phase>process-classes</phase>
                     <goals>
                         <goal>copy-resources</goal>
                     </goals>
                     <configuration>
-                        <outputDirectory>${basedir}/target/mapstore2/libs/cesium-navigation</outputDirectory>
+                        <outputDirectory>${basedir}/target/mapstore2/MapStore2/web/client/libs/cesium-navigation</outputDirectory>
                         <encoding>UTF-8</encoding>
                         <resources>
                             <resource>
@@ -272,77 +356,245 @@
             <artifactId>maven-war-plugin</artifactId>
             <version>2.1.1</version>
             <configuration>
+                <packagingExcludes>
+                    WEB-INF/lib/commons-codec-1.2.jar,
+                    WEB-INF/lib/commons-io-1.1.jar,
+                    WEB-INF/lib/commons-logging-1.0.4.jar,
+                    WEB-INF/lib/commons-pool-1.3.jar,
+                    WEB-INF/lib/spring-*-3.1.0*.jar
+                </packagingExcludes>
                 <overlays>
                     <overlay>
                         <groupId>it.geosolutions.geostore</groupId>
                         <artifactId>geostore-webapp</artifactId>
+                        <excludes>
+                            <exclude>WEB-INF/lib/commons-logging-*</exclude>
+                        </excludes>
                     </overlay>
                     <overlay>
                         <groupId>proxy</groupId>
                         <artifactId>http_proxy</artifactId>
+                        <excludes>
+                            <exclude>WEB-INF/lib/commons-codec-*</exclude>
+                            <exclude>WEB-INF/lib/commons-logging-*</exclude>
+                            <exclude>WEB-INF/lib/log4j-*</exclude>
+                        </excludes>
                     </overlay>
                 </overlays>
             </configuration>
         </plugin>
 
-        <!-- Run the application using "mvn jetty:run" -->
         <plugin>
-            <groupId>org.mortbay.jetty</groupId>
-            <artifactId>maven-jetty-plugin</artifactId>
-            <version>6.1.20</version>
+            <groupId>org.apache.tomcat.maven</groupId>
+            <artifactId>tomcat7-maven-plugin</artifactId>
+            <version>2.2</version>
             <configuration>
-                <webAppConfig>
-                    <contextPath>/mapstore2</contextPath>
-                </webAppConfig>
-                <connectors>
-                    <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-                        <port>9191</port>
-                        <maxIdleTime>60000</maxIdleTime>
-                    </connector>
-                </connectors>
-                <reload>manual</reload>
+                <path>/mapstore</path>
+                <port>8080</port>
             </configuration>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.tomcat.embed</groupId>
+                    <artifactId>tomcat-embed-core</artifactId>
+                    <version>${tomcat.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-util</artifactId>
+                    <version>${tomcat.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-coyote</artifactId>
+                    <version>${tomcat.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-api</artifactId>
+                    <version>${tomcat.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-jdbc</artifactId>
+                    <version>${tomcat.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-dbcp</artifactId>
+                    <version>${tomcat.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-servlet-api</artifactId>
+                    <version>${tomcat.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-jsp-api</artifactId>
+                    <version>${tomcat.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-jasper</artifactId>
+                    <version>${tomcat.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-jasper-el</artifactId>
+                    <version>${tomcat.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-el-api</artifactId>
+                    <version>${tomcat.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-catalina</artifactId>
+                    <version>${tomcat.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-tribes</artifactId>
+                    <version>${tomcat.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-catalina-ha</artifactId>
+                    <version>${tomcat.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-annotations-api</artifactId>
+                    <version>${tomcat.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-juli</artifactId>
+                    <version>${tomcat.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat.embed</groupId>
+                    <artifactId>tomcat-embed-logging-juli</artifactId>
+                    <version>${tomcat.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat.embed</groupId>
+                    <artifactId>tomcat-embed-logging-log4j</artifactId>
+                    <version>${tomcat.version}</version>
+                </dependency>
+            </dependencies>
         </plugin>
     </plugins>
   </build>
-
+<profiles>
+    <profile>
+      <id>printing</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+            <plugin>
+                <groupId>com.coderplus.maven.plugins</groupId>
+                <artifactId>copy-rename-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>rename-context</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                        <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                        <overWrite>true</overWrite>
+                        <sourceFile>src/printing/applicationContext-print.xml</sourceFile>
+                        <destinationFile>target/mapstore2/WEB-INF/classes/applicationContext-print.xml</destinationFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+       </build>
+       <dependencies>
+        <!-- mapfish-print -->
+        <dependency>
+            <groupId>org.mapfish.print</groupId>
+            <artifactId>print-lib</artifactId>
+            <version>geosolutions-2.0</version>
+        </dependency>
+       </dependencies>
+    </profile>
+    <profile>
+        <id>serveronly</id>
+        <properties>
+            <skipTests>true</skipTests>
+            <skipcesiumdownload>true</skipcesiumdownload>
+        </properties>
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>com.github.eirslett</groupId>
+                    <artifactId>frontend-maven-plugin</artifactId>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.6</version>
+                    <executions></executions>
+                </plugin>
+            </plugins>
+        </build>
+    </profile>
+    <profile>
+        <id>api_mapquest</id>
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>com.google.code.maven-replacer-plugin</groupId>
+                    <artifactId>replacer</artifactId>
+                    <version>1.5.3</version>
+                    <executions>
+                        <execution>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>replace</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <file>target/mapstore/index.html</file>
+                        <replacements>
+                            <replacement>
+                                <token>__API_KEY_MAPQUEST__</token>
+                                <value>${__API_KEY_MAPQUEST__}</value>
+                            </replacement>
+                        </replacements>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </build>
+    </profile>
+  </profiles>
 	<repositories>
         <!-- GeoSolutions -->
         <repository>
             <id>geosolutions</id>
             <name>GeoSolutions Repository</name>
-            <url>http://maven.geo-solutions.it</url>
+            <url>https://maven.geo-solutions.it</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
         </repository>
 
-        <!-- Apache -->
-        <repository>
-            <id>maven2-repository.dev.java.net</id>
-            <name>Java.net Repository for Maven</name>
-            <url>http://download.java.net/maven/2/</url>
-            <layout>default</layout>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-
-        <!-- JBoss -->
-        <repository>
-            <id>jboss-repo</id>
-            <name>JBoss Maven2 Repository</name>
-            <url>http://repository.jboss.com/maven2</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
 
         <!-- Spring -->
         <repository>
             <id>spring-release</id>
             <name>Spring Portfolio Release Repository</name>
-            <url>http://maven.springframework.org/release</url>
+            <url>https://maven.springframework.org/release</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -350,7 +602,7 @@
         <repository>
             <id>spring-external</id>
             <name>Spring Portfolio External Repository</name>
-            <url>http://maven.springframework.org/external</url>
+            <url>https://maven.springframework.org/external</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -359,7 +611,7 @@
         <repository>
             <id>osgeo</id>
             <name>Open Source Geospatial Foundation Repository</name>
-            <url>http://download.osgeo.org/webdav/geotools/</url>
+            <url>https://repo.osgeo.org/repository/release/</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>

@@ -1,6 +1,8 @@
 GeoPortale - Comune di Firenze
 ==========
 
+Aligned to 2021.01.xx mapstore stable branch
+
 Quick Start
 ------------
 
@@ -14,6 +16,10 @@ Start the development application locally:
 
 `npm install`
 
+in one terminal
+`npm run backend`
+
+in the other terminal
 `npm start`
 
 The application runs at `http://localhost:8081` afterwards.

@@ -1,4 +1,5 @@
 {
+  "version": 2,
 	"map": {
 		"projection": "EPSG:3857",
 		"units": "m",
@@ -11,52 +12,52 @@
 		"layers": [
 			{
 			 "format": "image/png",
-			 "name": "sfondi:sfondo_colori_DBT_2011", 
+			 "name": "sfondi:sfondo_colori_DBT_2011",
 			 "params": {},
 			 "singleTile": false,
-			 "title": "Sfondo Comune Firenze 2011", 
-			 "type": "wms", 
-			 "group": "background", 
+			 "title": "Sfondo Comune Firenze 2011",
+			 "type": "wms",
+			 "group": "background",
 			 "thumbURL": "http://datigis.comune.fi.it/img/thmb_sfondocoloriDBT2011CoFi.png",
 			 "url": "http://tms.comune.fi.it/geowebcache/service/wms",
-			 "visibility": true 
-			 }	,		 
+			 "visibility": true
+			 }	,
 			{
 			 "format": "image/png",
-			 "name": "sfondi:Ortofoto2017_COL_2K_CoFi", 
+			 "name": "sfondi:Ortofoto2017_COL_2K_CoFi",
 			 "params": {},
 			 "singleTile": false,
-			 "title": "Ortofoto Comune Firenze 2017", 
-			 "type": "wms", 
-			 "group": "background", 
+			 "title": "Ortofoto Comune Firenze 2017",
+			 "type": "wms",
+			 "group": "background",
 			 "thumbURL": "http://datigis.comune.fi.it/img/thmb_sfondiOrtofoto2017CoFi.png",
 			 "url": "http://tms.comune.fi.it/geowebcache/service/wms",
-			 "visibility": false 
-			 }	,	
+			 "visibility": false
+			 }	,
 			{
 			 "format": "image/png",
-			 "name": "sfondi:ortofoto2009", 
+			 "name": "sfondi:ortofoto2009",
 			 "params": {},
 			 "singleTile": false,
-			 "title": "Ortofoto Comune Firenze 2009", 
-			 "type": "wms", 
-			 "group": "background", 
+			 "title": "Ortofoto Comune Firenze 2009",
+			 "type": "wms",
+			 "group": "background",
 			 "thumbURL": "http://datigis.comune.fi.it/img/thmb_ortofoto2009CoFi.png",
 			 "url": "http://tms.comune.fi.it/geowebcache/service/wms",
-			 "visibility": false 
-			 }	,			
+			 "visibility": false
+			 }	,
 			{
 			 "format": "image/png",
-			 "name": "DBT2K:DBT_2K", 
+			 "name": "DBT2K:DBT_2K",
 			 "params": {},
 			 "singleTile": false,
-			 "title": "Database Topografico Comune Firenze", 
-			 "type": "wms", 
-			 "group": "background", 
+			 "title": "Database Topografico Comune Firenze",
+			 "type": "wms",
+			 "group": "background",
 			 "thumbURL": "http://datigis.comune.fi.it/img/thmb_dbt2k.png",
 			 "url": "http://tms.comune.intranet/geowebcache_internal/service/wms",
-			 "visibility": false 
-			 }	,			 
+			 "visibility": false
+			 }	,
 			{
 				"type": "osm",
 				"title": "Open Street Map",
@@ -65,22 +66,6 @@
 				"group": "background",
         "visibility": false
 			},
-      {
-        "type": "google",
-        "title": "Google HYBRID",
-        "name": "HYBRID",
-        "source": "google",
-        "group": "background",
-        "visibility": false
-      },
-      {
-        "type": "mapquest",
-        "title": "MapQuest OSM",
-        "name": "osm",
-        "source": "mapquest",
-        "group": "background",
-        "visibility": false
-      },
       {
         "type": "tileprovider",
         "title": "OpenTopoMap",
@@ -91,11 +76,31 @@
         "visibility": false
       },
       {
-        "type": "ol",
-        "title": "None",
+        "format": "image/jpeg",
+        "group": "background",
+        "name": "s2cloudless:s2cloudless",
+        "opacity": 1,
+        "title": "Sentinel 2 Cloudless",
+        "type": "wms",
+        "url": [
+          "https://1maps.geo-solutions.it/geoserver/wms", "https://2maps.geo-solutions.it/geoserver/wms", "https://3maps.geo-solutions.it/geoserver/wms", "https://4maps.geo-solutions.it/geoserver/wms", "https://5maps.geo-solutions.it/geoserver/wms", "https://6maps.geo-solutions.it/geoserver/wms"
+        ],
+        "source": "s2cloudless",
+        "visibility": false,
+        "singleTile": false
+      },
+      {
         "source": "ol",
         "group": "background",
-        "visibility": false
+        "title": "Empty Background",
+        "fixed": true,
+        "type": "empty",
+        "visibility": false,
+        "args": [
+          "Empty Background", {
+            "visibility": false
+          }
+        ]
       }
 		]
 	}

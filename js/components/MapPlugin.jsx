@@ -12,13 +12,12 @@ const {bindActionCreators} = require('redux');
 
 const assign = require('object-assign');
 
-const {changeMapView} = require('../../MapStore2/web/client/actions/map');
+const {changeMapView} = require('@mapstore/actions/map');
 
 
-const mapType = "openlayers";
-const WMap = require('../../MapStore2/web/client/components/map/' + mapType + '/Map');
-const Layer = require('../../MapStore2/web/client/components/map/' + mapType + '/Layer');
-require('../../MapStore2/web/client/components/map/' + mapType + '/plugins/index');
+const WMap = require('@mapstore/components/map/openlayers/Map').default;
+const Layer = require('@mapstore/components/map/openlayers/Layer').default;
+require('@mapstore/components/map/openlayers/plugins/index').default;
 
 const MapPlugin = (props) => {
     return props.map ?

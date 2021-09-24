@@ -61,10 +61,10 @@ html, body, #map {
     opacity: 0.7;
     top: 5px;
 }
-.MapStore2-C027 #page-maps.page-maps .ms-home-description {
+.ms2 #page-maps.page-maps .ms-home-description {
     background-image: none !important;
 }
-.MapStore2-C027 #page-maps.page-maps .ms-home-description h1 {
+.ms2 #page-maps.page-maps .ms-home-description h1 {
     background-image: url(../img/logo.png);
     background-size: 60px 60px;
     margin-top: 40px;
@@ -72,10 +72,15 @@ html, body, #map {
     background-repeat: no-repeat;
     background-position: center;
 }
-.MapStore2-C027 #page-maps.page-maps .ms-home-description p {
+.ms2 #page-maps.page-maps .ms-home-description p {
     font-weight: bold;
 }
 
-.MapStore2-C027 .background-preview-icon-frame img {
+.ms2 .background-preview-icon-frame img {
     background-color: #ffffff;
 }
+
+.ms2 #mapstore-annotations-panel, .mapstore-annotations-info-viewer .mapstore-annotations-info-viewer-items .geometries-toolbar{
+    background-color: #f2f2f2 !important;
+}
+

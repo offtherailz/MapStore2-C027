@@ -1,72 +1,62 @@
-var webpackConfig = require('./webpack.config.js');
-var path = require("path");
-var LoaderOptionsPlugin = require("webpack/lib/LoaderOptionsPlugin");
-var ParallelUglifyPlugin = require("webpack-parallel-uglify-plugin");
-var DefinePlugin = require("webpack/lib/DefinePlugin");
-var NormalModuleReplacementPlugin = require("webpack/lib/NormalModuleReplacementPlugin");
-const extractThemesPlugin = require('./MapStore2/themes.js').extractThemesPlugin;
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+
+const path = require("path");
+
+const extractThemesPlugin = require('./MapStore2/build/themes.js').extractThemesPlugin;
+const ModuleFederationPlugin = require('./MapStore2/build/moduleFederation').plugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-webpackConfig.plugins = [
-    new CopyWebpackPlugin([
-        { from: path.join(__dirname, 'node_modules', 'bootstrap', 'less'), to: path.join(__dirname, "web", "client", "dist", "bootstrap", "less") }
-    ]),
-    new LoaderOptionsPlugin({
-        debug: false,
-        options: {
-            postcss: {
-                plugins: [
-                  require('postcss-prefix-selector')({prefix: '.MapStore2-C027', exclude: ['.MapStore2-C027', '.ms2', '[data-ms2-container]']})
-                ]
-            },
-            context: __dirname
-        }
-    }),
-    new DefinePlugin({
-        "__DEVTOOLS__": false
-    }),
-    new DefinePlugin({
-      'process.env': {
-        'NODE_ENV': '"production"'
-      }
-    }),
-    new NormalModuleReplacementPlugin(/leaflet$/, path.join(__dirname, "MapStore2", "web", "client", "libs", "leaflet")),
-    new NormalModuleReplacementPlugin(/openlayers$/, path.join(__dirname, "MapStore2", "web", "client", "libs", "openlayers")),
-    new NormalModuleReplacementPlugin(/cesium$/, path.join(__dirname, "MapStore2", "web", "client", "libs", "cesium")),
-    new NormalModuleReplacementPlugin(/proj4$/, path.join(__dirname, "MapStore2", "web", "client", "libs", "proj4")),
-    new ParallelUglifyPlugin({
-        uglifyJS: {
-            sourceMap: false,
-            compress: {warnings: false},
-            mangle: true
-        }
-    }),
-    extractThemesPlugin,
-    new HtmlWebpackPlugin({
-        template: 'indexTemplate.html',
-        chunks: ['MapStore2-C027'],
-        inject: true,
-        hash: true
-    }),
-    new HtmlWebpackPlugin({
-        template: 'embeddedTemplate.html',
-        chunks: ['embedded'],
-        inject: true,
-        hash: true,
-        filename: 'embedded.html'
-    })
-];
-webpackConfig.devtool = undefined;
-
-// this is a workaround for this issue https://github.com/webpack/file-loader/issues/3
-// use `__webpack_public_path__` in the index.html when fixed
-webpackConfig.output.publicPath = "/mapstore2/dist/";
-webpackConfig.output.chunkFilename = "[name].[hash].chunk.js";
-webpackConfig.module.rules.push(
-{
-    test: /\.html$/,
-    loader: 'html-loader'
-});
-
-module.exports = webpackConfig;
+module.exports = require('./MapStore2/build/buildConfig')(
+    {
+        'MapStore2-C027': path.join(__dirname, "js", "apps", "app"),
+        "embedded": path.join(__dirname, "js", "apps", "embedded"),
+        'geostory-embedded': path.join(__dirname, "js", "apps", "geostoryEmbedded"),
+        "dashboard-embedded": path.join(__dirname, "js", "apps", "dashboardEmbedded")
+    },
+    {
+        "themes/firenze": path.join(__dirname, "themes", "firenze", "theme.less")
+    },
+    {
+        base: __dirname,
+        dist: path.join(__dirname, "dist"),
+        framework: path.join(__dirname, "MapStore2", "web", "client"),
+        code: [path.join(__dirname, "js"), path.join(__dirname, "MapStore2", "web", "client")]
+    },
+    [extractThemesPlugin, ModuleFederationPlugin],
+    true,
+    "dist/",
+    "",
+    [
+        new HtmlWebpackPlugin({
+            template: 'indexTemplate.html',
+            chunks: ['MapStore2-C027'],
+            inject: true,
+            hash: true
+        }),
+        new HtmlWebpackPlugin({
+            template: 'embeddedTemplate.html',
+            chunks: ['embedded'],
+            inject: true,
+            hash: true,
+            filename: 'embedded.html'
+        }),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, 'geostory-embedded-template.html'),
+            chunks: ['geostory-embedded'],
+            inject: "body",
+            hash: true,
+            filename: 'geostory-embedded.html'
+        }),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, 'dashboard-embedded-template.html'),
+            chunks: ['dashboard-embedded'],
+            inject: 'body',
+            hash: true,
+            filename: 'dashboard-embedded.html'
+        })
+    ],
+    {
+        "@mapstore/patcher": path.resolve(__dirname, "node_modules", "@mapstore", "patcher"),
+        "@mapstore": path.resolve(__dirname, "MapStore2", "web", "client"),
+        "@js": path.resolve(__dirname, "js")
+    }
+);

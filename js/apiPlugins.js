@@ -8,22 +8,24 @@
 
 module.exports = {
     plugins: {
-        IdentifyPlugin: require('../MapStore2/web/client/plugins/Identify'),
-        TOCPlugin: require('../MapStore2/web/client/plugins/TOC'),
-        BackgroundSwitcherPlugin: require('../MapStore2/web/client/plugins/BackgroundSwitcher'),
-        MapPlugin: require('../MapStore2/web/client/plugins/Map'),
-        ToolbarPlugin: require('../MapStore2/web/client/plugins/Toolbar'),
-        DrawerMenuPlugin: require('../MapStore2/web/client/plugins/DrawerMenu'),
-        SearchPlugin: require('../MapStore2/web/client/plugins/Search'),
-        LocatePlugin: require('../MapStore2/web/client/plugins/Locate'),
-        ZoomAllPlugin: require('../MapStore2/web/client/plugins/ZoomAll'),
-        MapLoadingPlugin: require('../MapStore2/web/client/plugins/MapLoading'),
-        GoFullPlugin: require('../MapStore2/web/client/plugins/GoFull'),
-        OmniBarPlugin: require('../MapStore2/web/client/plugins/OmniBar'),
-        MapFooterPlugin: require('../MapStore2/web/client/plugins/MapFooter')
+
+        DetailsPlugin: require('@mapstore/plugins/Details').default,
+        DrawerMenuPlugin: require('@mapstore/plugins/DrawerMenu').default,
+        FeedbackMaskPlugin: require('@mapstore/plugins/FeedbackMask').default,
+        GoFullPlugin: require('@mapstore/plugins/GoFull').default,
+        IdentifyPlugin: require('@mapstore/plugins/Identify').default,
+        LocatePlugin: require('@mapstore/plugins/Locate').default,
+        MapFooterPlugin: require('@mapstore/plugins/MapFooter').default,
+        MapLoadingPlugin: require('@mapstore/plugins/MapLoading').default,
+        MapPlugin: require('@mapstore/plugins/Map').default,
+        OmniBarPlugin: require('@mapstore/plugins/OmniBar').default,
+        SearchPlugin: require('@mapstore/plugins/Search').default,
+        TOCPlugin: require('@mapstore/plugins/TOC').default,
+        ToolbarPlugin: require('@mapstore/plugins/Toolbar').default,
+        ZoomAllPlugin: require('@mapstore/plugins/ZoomAll').default
     },
     requires: {
         ReactSwipe: require('react-swipeable-views').default,
-        SwipeHeader: require('../MapStore2/web/client/components/data/identify/SwipeHeader')
+        SwipeHeader: require('@mapstore/components/data/identify/SwipeHeader').default
     }
 };

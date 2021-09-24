@@ -8,6 +8,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
             classpath*:applicationContext.xml
+            classpath*:applicationContext-print.xml
         </param-value>
 	</context-param>
     <display-name>GeoPortale - Comune di Firenze - Web App</display-name>
@@ -45,6 +46,34 @@
 		<url-pattern>/rest/*</url-pattern>
 	</filter-mapping>
 
+	<!-- GZip compression -->
+	<filter>
+		<filter-name>CompressionFilter</filter-name>
+		<filter-class>net.sf.ehcache.constructs.web.filter.GzipFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CompressionFilter</filter-name>
+		<url-pattern>*.css</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CompressionFilter</filter-name>
+		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CompressionFilter</filter-name>
+		<url-pattern>*.js</url-pattern>
+	</filter-mapping>
+
+    <!--  Backend Spring MVC controllers -->
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/rest/config/*</url-pattern>
+    </servlet-mapping>
     <!-- CXF Servlet -->
 	<servlet>
 		<servlet-name>CXFServlet</servlet-name>
@@ -65,6 +94,20 @@
     <servlet-mapping>
       <servlet-name>HttpProxy</servlet-name>
       <url-pattern>/proxy/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- Printing Servlet -->
+    <servlet>
+       <servlet-name>mapfish.print</servlet-name>
+       <servlet-class>org.mapfish.print.servlet.MapPrinterServlet</servlet-class>
+       <init-param>
+         <param-name>config</param-name>
+         <param-value>printing/config.yaml</param-value>
+       </init-param>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>mapfish.print</servlet-name>
+      <url-pattern>/pdf/*</url-pattern>
     </servlet-mapping>
 
 	<!-- Default page to serve -->
