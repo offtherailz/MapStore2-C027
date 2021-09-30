@@ -863,44 +863,6 @@
           }
         ],
         "manager": ["Header", "Redirect", "Manager", "Home", "UserManager", "GroupManager", "Footer"],
-        "context-manager": ["Header", "Redirect", "Home", "ContextManager", "Footer"],
-        "rulesmanager": [
-          "Redirect",
-          {
-            "name": "OmniBar",
-            "cfg": {
-              "containerPosition": "header",
-              "className": "navbar shadow navbar-home"
-            }
-          },
-          {
-            "name": "Home",
-            "override": {
-              "OmniBar": {
-                "position": 1,
-                "priority": 1
-              }
-            }
-          }, {
-            "name": "ManagerMenu",
-            "cfg": {
-                "enableContextManager": true
-            }
-        },
-          "Login",
-          "NavMenu",
-          {
-            "name": "Header",
-            "hide": true
-          },
-          "RulesDataGrid",
-          "Notifications",
-          {
-            "name": "RulesEditor",
-            "cfg": {
-              "containerPosition": "columns"
-            }
-          }
-        ]
+        "context-manager": ["Header", "Redirect", "Home", "ContextManager", "Footer"]
       }
   }
