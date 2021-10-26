@@ -23,6 +23,11 @@
       <artifactId>mapstore-backend</artifactId>
       <version>1.1.2</version>
     </dependency>
+    <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>42.2.23</version>
+    </dependency>
     <!-- ================================================================ -->
     <!-- GeoStore modules -->
     <!-- ================================================================ -->
@@ -357,6 +362,7 @@
             <version>2.1.1</version>
             <configuration>
                 <packagingExcludes>
+                    WEB-INF/lib/postgresql-8.4-*.jar,
                     WEB-INF/lib/commons-codec-1.2.jar,
                     WEB-INF/lib/commons-io-1.1.jar,
                     WEB-INF/lib/commons-logging-1.0.4.jar,
