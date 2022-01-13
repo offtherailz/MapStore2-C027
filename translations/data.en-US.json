@@ -2,7 +2,7 @@
     "locale": "en-US",
     "messages": {
         "home":{
-            "shortDescription": "Risorse Dati e Sistema Informativo Territoriale del Comune di Firenze"
+            "shortDescription": "<b>Data Resources and Territorial Information System of the Municipality of Florence</b><br/><font size=-1>***The information contained in the cartography represents the best knowledge available to date of the managed infrastructures;<br/>  some may contain errors, some are indicative of the service and not exhaustive, others are subject to periodic update<br/> (monthly, bimonthly or without a fixed frequency). For this information, you can access the metadata catalog or contact the SIT office.</font>"
         }
     }
 }
